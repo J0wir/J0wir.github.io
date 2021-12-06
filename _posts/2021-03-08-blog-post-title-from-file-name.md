@@ -1,6 +1,6 @@
 ## Cyberdefenders - CyberCorp Case 1
 
-This  is a walkthrough of the CyberCorp Case 1 challenge by CyberDefenders. The challenge can be found <a href="https://cyberdefenders.org/labs/74"> here </a>.
+This  is a walkthrough of the CyberCorp Case 1 challenge by CyberDefenders. The challenge can be found <a href="https://cyberdefenders.org/labs/74"> here</a>.
 
 
 
