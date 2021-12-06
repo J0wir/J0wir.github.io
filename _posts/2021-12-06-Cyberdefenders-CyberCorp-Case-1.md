@@ -33,7 +33,11 @@ vol.py -f memdump.mem --profile=Win10x64_17134 netscan | grep :1900.
 
 All connections on port 1900 are from <b>svchost.exe<b> with the PID <b>4688<b>. The parent process can be found by running the <b>pstree</b< module. This will display the process listing in tree form. To search for the process with PID 4688 a grep filter was added to the query.
 
-
+```
+vol.py -f memdump.mem --profile=Win10x64_17134 pstree | grep 4688
+```
+    The output of this command shows the parent process of svchost.exe being <b>648</b>     
+    
 #### Question 3 - What is the IP address of the attacker command and control center, the connection with which was still active at the time of forensic artifacts acquisition?
 
 #### Question 4 - What is the PID of the process where malicious code was located at the moment of forensic artifacts acquisition?
