@@ -22,14 +22,13 @@ Before we can do this, we need to find the correct profile for the memory image.
 ```
 vol.py -f memdump.mem imageinfo
 ```
-
-[insert foto]
+![Screenshot 2021-12-06 at 16 21 54](https://user-images.githubusercontent.com/95626414/144877393-63dc3104-ee67-41bf-a30f-19c7d943a654.png)
 
 Next, we use the <b>netscan</b> plugin to return all network connections. Grep was used to filter the output for port 1900.
 ```
 vol.py -f memdump.mem --profile=Win10x64_17134 netscan | grep :1900.
 ```
-[insert foto]
+![Screenshot 2021-12-06 at 16 34 22](https://user-images.githubusercontent.com/95626414/144877508-ddfd1d4a-957c-427d-9af2-3ae9c8bbfa74.png)
 
 All connections on port 1900 are from <b>svchost.exe</b> with the PID <b>4688</b>. The parent process can be found by running the <b>pstree</b> module. This will display the process listing in tree form. To search for the process with PID 4688 a grep filter was added to the query.
 
