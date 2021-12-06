@@ -48,6 +48,13 @@ vol.py -f memdump.mem --profile=Win10x64_17134 pstree | grep 4688
 The output of this command shows the parent process of svchost.exe being <b>648</b>     
     
 #### Question 3 - What is the IP address of the attacker command and control center, the connection with which was still active at the time of forensic artifacts acquisition?
+While scrolling through the <b>netscan</b> output I noticed the following ESTABLISHED connection:
+```
+TCPv4 192.168.184.130:50133 196.6.112.70:443 ESTABLISHED -1
+```
+This in combination with the below entry in the Windows Event Logging, made me think the anwser is: <b>196.6.112.70</b>
+
+![image](https://user-images.githubusercontent.com/95626414/144878901-5f7203e5-dda7-467b-85ab-c3c7916e6253.png)
 
 #### Question 4 - What is the PID of the process where malicious code was located at the moment of forensic artifacts acquisition?
 
