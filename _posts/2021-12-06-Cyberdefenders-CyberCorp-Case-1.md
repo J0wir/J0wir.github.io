@@ -9,11 +9,21 @@ CyberCorp's Cybersecurity team isolated one of the potentially compromised hosts
 
 ### Tools used for this challenge
 -Chainsaw  
--Volatility 2.7
+-Volatility 2.7  
+-Registry Explorer
 
 ### Write-up
 
 #### Question 1 - What is the build number (in the format ddddd, where each d is a single decimal number, for example - 12345) of the installed Windows version?
+Every Windows version since 2000, will keep product version in the Registry. To view this information you can use a tool like “Registry Explorer”. 
+
+The product version information including the build number is stored in the following key:  
+<b>HKLM\Software\Microsoft\Windows NT\CurrentVersion</b>
+
+When viewing this key, we can see the below information, including the build number.
+![image](https://user-images.githubusercontent.com/95626414/144877942-c0a726f5-045f-4a2d-b931-70caf53e79d9.png)
+
+As shown in the picture the currentbuild is <b>17134</b>
 
 #### Question 2 - What is the parent process PID of the process, that accepts incoming network connections on the port 1900/UDP?
 To answer this question, I’ve used Volatility 2.7 to find incoming network connections and to determine what the parent process is.
