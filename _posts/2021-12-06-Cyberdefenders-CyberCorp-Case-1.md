@@ -8,7 +8,7 @@ CyberCorp company has been informed that its infrastructure is likely to be comp
 CyberCorp's Cybersecurity team isolated one of the potentially compromised hosts from the corporate network and collected artifacts necessary for the investigation: memory dump, OS event logs, registry files, Prefetch files, $MFT file, ShimCache, AmCache, network traffic dumps. You will have to analyze the collected artifacts and answer the questions to complete the investigation.
 
 ### Tools used for this challenge
--Chainsaw
+-Chainsaw  
 -Volatility 2.7
 
 ### Write-up
@@ -22,6 +22,16 @@ Before we can do this, we need to find the correct profile for the memory image.
 ```
 vol.py -f memdump.mem imageinfo
 ```
+
+[insert foto]
+
+Next, we use the <b>netscan</b> plugin to return all network connections. Grep was used to filter the output for port 1900.
+```
+vol.py -f memdump.mem --profile=Win10x64_17134 netscan | grep :1900.
+```
+[insert foto]
+
+All connections on port 1900 are from <b>svchost.exe<b> with the PID <b>4688<b>. The parent process can be found by running the <b>pstree</b< module. This will display the process listing in tree form. To search for the process with PID 4688 a grep filter was added to the query.
 
 
 #### Question 3 - What is the IP address of the attacker command and control center, the connection with which was still active at the time of forensic artifacts acquisition?
