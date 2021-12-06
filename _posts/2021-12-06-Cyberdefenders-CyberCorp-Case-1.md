@@ -20,13 +20,27 @@ CyberCorp's Cybersecurity team isolated one of the potentially compromised hosts
 
 #### Question 4 - What is the PID of the process where malicious code was located at the moment of forensic artifacts acquisition?
 
+#### Question 5 - On a compromised system, malicious code, discovered in the previous step, is launched every system start, since the attacker has used one of the persistence techniques. So, what is the name of the autostart entry (those part, that is directly responsible for code execution), used by the attacker for persistence?
 
+#### Question 6 - The autostart entry from the previous step is used to launch the script, which in turn leads to the malicious code execution in the memory of the process, which is discussed in question 4. This code is extracted by script from some system place in the encoded form. The decoded value of this string is executable PE-file. How did Microsoft Antivirus detect this file on 2020-06-21?
 
+#### Question 7 - The process, mentioned in the question 4, isn't the initial process, where malicious code, described in the previous question, was executed by script from autostart. What is the name of the initial process (in the format program.exe), that is spawned by autostart script and used for further malicious code execution, that subsequently migrates to the address space of the process, mentioned in the question 4.
 
+#### Question 8 - The autostart entry from the previous step is used to launch the script, which in turn leads to the malicious code execution in the memory of the process, which is discussed in question 4. Provide the URL, which was used to download this script from the Internet during the host compromise. The script that runs at each system star (which is described in question 6) was downloaded to the compromised system from the Internet. Provide the URL, which was used to download this script
 
+#### Question 9 - The system was compromised as the result of a Microsoft Office document opening, received by email. What is MD5 hash of this document (for example, d41d8cd98f00b204e9800998ecf8427e)?
 
+#### Question 10 - The document, that was initially opened by user, didn't contain anything malicious itself. It downloaded another document from the Internet as a Microsoft Word template. Malicious code, which has led to the system compromise, is located inside this template directly. What link was used by the first document to download the second document as a template (for example, https://address/file.com)?
 
+#### Question 11 - During the post-exploitation attacker delivered to the compromised host a special Active Directory Enumeration utility. Which link did the attacker use to download this utility (for example, https://address/file.com)?
 
+#### Question 12 - As described in the previous question utility has created several files in the compromised system, that subsequently were deleted by an attacker. One of the created files had a bin extension. What is the name of this file (for example, name.bin)?
+
+#### Question 13 - During the post-exploitation attacker has compromised a privileged user account. What is its password?
+
+#### Question 14 - What is the name of the tool (for example, program.exe), that probably was used by an attacker to compromise the user account?
+
+#### Question 15 - The attacker used a compromised account for unauthorized Domain Controller access. What is the IP address of this Domain Controller?
 
 
 Due to a plugin called `jekyll-titles-from-headings` which is supported by GitHub Pages by default. The above header (in the markdown file) will be automatically used as the pages title.
