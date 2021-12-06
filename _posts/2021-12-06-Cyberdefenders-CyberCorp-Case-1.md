@@ -9,12 +9,20 @@ CyberCorp's Cybersecurity team isolated one of the potentially compromised hosts
 
 ### Tools used for this challenge
 -Chainsaw
+-Volatility 2.7
 
 ### Write-up
 
 #### Question 1 - What is the build number (in the format ddddd, where each d is a single decimal number, for example - 12345) of the installed Windows version?
 
 #### Question 2 - What is the parent process PID of the process, that accepts incoming network connections on the port 1900/UDP?
+To answer this question, I’ve used Volatility 2.7 to find incoming network connections and to determine what the parent process is.
+
+Before we can do this, we need to find the correct profile for the memory image. This was done by running the <b>imageinfo</b> plugin.
+```
+vol.py -f memdump.mem imageinfo
+```
+
 
 #### Question 3 - What is the IP address of the attacker command and control center, the connection with which was still active at the time of forensic artifacts acquisition?
 
