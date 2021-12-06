@@ -1,6 +1,28 @@
 ## Cyberdefenders - CyberCorp Case 1
 
-This  is a walkthrough of the CyberCorp Case 1 challenge by CyberDefenders. The challenge can be found <a href="https://cyberdefenders.org/labs/74"> here</a>.
+This is a write-up of the CyberCorp Case 1 challenge by CyberDefenders. The challenge can be found <a href="https://cyberdefenders.org/labs/74"> here</a>.
+
+### Scenario
+CyberCorp company has been informed that its infrastructure is likely to be compromised, as there are a number of anomalies in its outgoing traffic. The anomalies suggest that a known threat group behind this attack.
+
+CyberCorp's Cybersecurity team isolated one of the potentially compromised hosts from the corporate network and collected artifacts necessary for the investigation: memory dump, OS event logs, registry files, Prefetch files, $MFT file, ShimCache, AmCache, network traffic dumps. You will have to analyze the collected artifacts and answer the questions to complete the investigation.
+
+### Tools used for this challenge
+-Chainsaw
+
+### Write-up
+
+#### Question 1 - What is the build number (in the format ddddd, where each d is a single decimal number, for example - 12345) of the installed Windows version?
+
+#### Question 2 - What is the parent process PID of the process, that accepts incoming network connections on the port 1900/UDP?
+
+#### Question 3 - What is the IP address of the attacker command and control center, the connection with which was still active at the time of forensic artifacts acquisition?
+
+#### Question 4 - What is the PID of the process where malicious code was located at the moment of forensic artifacts acquisition?
+
+
+
+
 
 
 
