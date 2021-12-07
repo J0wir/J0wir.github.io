@@ -113,6 +113,6 @@ As described earlier I've used ChainSaw to analyse the Windows Event Logging. Th
 ### Question 14 - What is the name of the tool (for example, program.exe), that probably was used by an attacker to compromise the user account?
 
 ### Question 15 - The attacker used a compromised account for unauthorized Domain Controller access. What is the IP address of this Domain Controller?
-The answer for this question was found in the output during question 13.
+The answer for this question was found during question 13.
 
 The answer is <b>192.168.184.100</b>
