@@ -74,6 +74,8 @@ powershell.exe -noP -ep bypass iex -c \"('C:\\Users\\john.goldberg\\AppData\\Roa
 While looking deeper into this, I noticed a WMI CommandLineEventConsumer with the name: <b>LogRotate Consumer</b> using the same command line.
 ![image](https://user-images.githubusercontent.com/95626414/145028989-4192ef62-e9ba-408f-9e30-ce4d57bd4936.png)
 
+As shown in the picture this script in launched everytime the user enters his username and password.
+
 This was used by the Adversary to maintain persistence on the system.
 
 ### Question 6 - The autostart entry from the previous step is used to launch the script, which in turn leads to the malicious code execution in the memory of the process, which is discussed in question 4. This code is extracted by script from some system place in the encoded form. The decoded value of this string is executable PE-file. How did Microsoft Antivirus detect this file on 2020-06-21?
