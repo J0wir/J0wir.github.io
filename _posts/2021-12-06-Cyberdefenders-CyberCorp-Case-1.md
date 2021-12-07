@@ -78,6 +78,11 @@ This was used by the Adversary to maintain persistence on the system.
 ### Question 8 - The autostart entry from the previous step is used to launch the script, which in turn leads to the malicious code execution in the memory of the process, which is discussed in question 4. Provide the URL, which was used to download this script from the Internet during the host compromise. The script that runs at each system star (which is described in question 6) was downloaded to the compromised system from the Internet. Provide the URL, which was used to download this script
 
 ### Question 9 - The system was compromised as the result of a Microsoft Office document opening, received by email. What is MD5 hash of this document (for example, d41d8cd98f00b204e9800998ecf8427e)?
+I started by looking for document files with the <b>filescan</b> module in Volatility. This gave me the below results:
+![image](https://user-images.githubusercontent.com/95626414/145031565-cf60a7ec-716b-418b-bdc5-2e1711f089f0.png)
+So I guess it's going to be one of the above files. But, how do I receive them to calculate the hash value..
+
+[TODO}
 
 ### Question 10 - The document, that was initially opened by user, didn't contain anything malicious itself. It downloaded another document from the Internet as a Microsoft Word template. Malicious code, which has led to the system compromise, is located inside this template directly. What link was used by the first document to download the second document as a template (for example, https://address/file.com)?
 
