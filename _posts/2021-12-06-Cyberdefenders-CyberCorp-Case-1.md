@@ -99,13 +99,13 @@ To awnser this question I looked at the Master File Table (MFT), since this is a
 ```
 
 ### Question 13 - During the post-exploitation attacker has compromised a privileged user account. What is its password?
-As described earlier I've used ChainSaw to analyse the Windows Event Logging. The output of this tool shows the use of <b>net use</b>. In this commando the password is shown: <b>!!feb15th2k6!!</b>.
+As described earlier I've used ChainSaw to analyse the Windows Event Logging. The output of this tool shows the use of <b>net use</b>. In this commando the password is shown: <b>!!feb15th2k6!!</b>
 ![image](https://user-images.githubusercontent.com/95626414/145032229-d2273f20-ee79-4bfc-805b-b396a9d411c3.png)
-
-
 
 
 ### Question 14 - What is the name of the tool (for example, program.exe), that probably was used by an attacker to compromise the user account?
 
 ### Question 15 - The attacker used a compromised account for unauthorized Domain Controller access. What is the IP address of this Domain Controller?
+The answer for this question was found in the output during question 13.
 
+The answer is <b>192.168.184.100</b>
