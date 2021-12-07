@@ -85,40 +85,14 @@ This was used by the Adversary to maintain persistence on the system.
 
 ### Question 12 - As described in the previous question utility has created several files in the compromised system, that subsequently were deleted by an attacker. One of the created files had a bin extension. What is the name of this file (for example, name.bin)?
 
+To awnser this question I parsed the MFT with EricZimmermans his MFT parser. Next, I did filter on <b>.bin</b> and scrolled through the results. While scrolling I noticed a strange file name in the temp directory.
+```
+.\Windows\Temp	ODNhN2YwNWUtYWFmYy00MDVmLWFhYTQtNGMzM2Q3NmYwMWM4.bin
+```
+
 ### Question 13 - During the post-exploitation attacker has compromised a privileged user account. What is its password?
 
 ### Question 14 - What is the name of the tool (for example, program.exe), that probably was used by an attacker to compromise the user account?
 
 ### Question 15 - The attacker used a compromised account for unauthorized Domain Controller access. What is the IP address of this Domain Controller?
 
-
-Due to a plugin called `jekyll-titles-from-headings` which is supported by GitHub Pages by default. The above header (in the markdown file) will be automatically used as the pages title.
-
-If the file does not start with a header, then the post title will be derived from the filename.
-
-This is a sample blog post. You can talk about all sorts of fun things here.
-
----
-
-### This is a header
-
-#### Some T-SQL Code
-
-```tsql
-SELECT This, [Is], A, Code, Block -- Using SSMS style syntax highlighting
-    , REVERSE('abc')
-FROM dbo.SomeTable s
-    CROSS JOIN dbo.OtherTable o;
-```
-
-#### Some PowerShell Code
-
-```powershell
-Write-Host "This is a powershell Code block";
-
-# There are many other languages you can use, but the style has to be loaded first
-
-ForEach ($thing in $things) {
-    Write-Output "It highlights it using the GitHub style"
-}
-```
