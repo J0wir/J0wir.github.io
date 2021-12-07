@@ -85,7 +85,7 @@ This was used by the Adversary to maintain persistence on the system.
 
 ### Question 12 - As described in the previous question utility has created several files in the compromised system, that subsequently were deleted by an attacker. One of the created files had a bin extension. What is the name of this file (for example, name.bin)?
 
-To awnser this question I parsed the MFT with EricZimmermans his MFT parser. Next, I did filter on <b>.bin</b> and scrolled through the results. While scrolling I noticed a strange file name in the temp directory.
+To awnser this question I looked at the Master File Table (MFT), since this is a database in which information about every file on a NTFS volume is kept. I did this by parsing the MFT file with EricZimmermans his MFT parser. Next, I did filter on <b>.bin</b> and scrolled through the results. While scrolling I noticed a strange file name in the temp directory.
 ```
 .\Windows\Temp	ODNhN2YwNWUtYWFmYy00MDVmLWFhYTQtNGMzM2Q3NmYwMWM4.bin
 ```
