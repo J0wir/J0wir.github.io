@@ -62,6 +62,11 @@ To answer this question I analysed the <b>pstree</b> output and noticed some int
 The PID of <b>winlogon.exe</b> was the correct answer.
 
 ### Question 5 - On a compromised system, malicious code, discovered in the previous step, is launched every system start, since the attacker has used one of the persistence techniques. So, what is the name of the autostart entry (those part, that is directly responsible for code execution), used by the attacker for persistence?
+This question did take me some time. I was looking at all sort of persistence techniques, but forgot about WMI. While analysing the Windows Event Logs I noticed some processes being created (<b>EventID 4688</b>) with the below command line:
+```
+powershell.exe -noP -ep bypass iex -c \"('C:\\Users\\john.goldberg\\AppData\\Roaming\\Microsoft\\Office\\Recent\\tmpA7Z2.ps1')
+```
+
 
 ### Question 6 - The autostart entry from the previous step is used to launch the script, which in turn leads to the malicious code execution in the memory of the process, which is discussed in question 4. This code is extracted by script from some system place in the encoded form. The decoded value of this string is executable PE-file. How did Microsoft Antivirus detect this file on 2020-06-21?
 
