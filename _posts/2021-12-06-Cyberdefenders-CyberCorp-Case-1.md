@@ -87,6 +87,9 @@ So I guess it's going to be one of the above files. But, how do I receive them t
 ### Question 10 - The document, that was initially opened by user, didn't contain anything malicious itself. It downloaded another document from the Internet as a Microsoft Word template. Malicious code, which has led to the system compromise, is located inside this template directly. What link was used by the first document to download the second document as a template (for example, https://address/file.com)?
 
 ### Question 11 - During the post-exploitation attacker delivered to the compromised host a special Active Directory Enumeration utility. Which link did the attacker use to download this utility (for example, https://address/file.com)?
+I found this answer with a little bit of luck. When I saw Windows Event Logs in the evidence directory, the first thing I did is run Chainsaw against it. I been using this tool lately every time I must investigate Event Logging. I would recommend this tool to everyone.
+![image](https://user-images.githubusercontent.com/95626414/145031916-1a7a0c99-7d35-485d-998f-3d42fe47d9ff.png)
+As shown in the picture the Adverary used </b<http://196.6.112.70/disco.jpg</b> to download the utility.
 
 ### Question 12 - As described in the previous question utility has created several files in the compromised system, that subsequently were deleted by an attacker. One of the created files had a bin extension. What is the name of this file (for example, name.bin)?
 
@@ -96,6 +99,8 @@ To awnser this question I looked at the Master File Table (MFT), since this is a
 ```
 
 ### Question 13 - During the post-exploitation attacker has compromised a privileged user account. What is its password?
+
+
 
 ### Question 14 - What is the name of the tool (for example, program.exe), that probably was used by an attacker to compromise the user account?
 
