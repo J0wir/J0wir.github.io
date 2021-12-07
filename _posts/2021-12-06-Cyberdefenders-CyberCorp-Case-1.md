@@ -58,7 +58,12 @@ This in combination with the below entry in the Windows Event Logging, made me t
 
 ### Question 4 - What is the PID of the process where malicious code was located at the moment of forensic artifacts acquisition?
 To answer this question I analysed the <b>pstree</b> output and noticed some intressting process being spawned by the parent process <b>winlogon.exe</b>.
-![image](https://user-images.githubusercontent.com/95626414/145025813-ff2f764b-d463-42a7-8ab1-78425e8b5556.png)
+![image](https://user-images.githubusercontent.com/95626414/145025813-ff2f764b-d463-42a7-8ab1-78425e8b5556.png)  
+
+This in combination with malicious code being embedded in the process made us think this was the correct answer.
+![image](https://user-images.githubusercontent.com/95626414/145034909-8e265975-9d44-4119-8fd1-65f16e934734.png)
+
+
 The PID of <b>winlogon.exe</b> was the correct answer.
 
 ### Question 5 - On a compromised system, malicious code, discovered in the previous step, is launched every system start, since the attacker has used one of the persistence techniques. So, what is the name of the autostart entry (those part, that is directly responsible for code execution), used by the attacker for persistence?
