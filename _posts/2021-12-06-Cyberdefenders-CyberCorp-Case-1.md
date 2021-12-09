@@ -10,7 +10,9 @@ CyberCorp's Cybersecurity team isolated one of the potentially compromised hosts
 ## Tools used for this challenge
 -Chainsaw  
 -Volatility 2.7  
--Registry Explorer
+-Registry Explorer  
+-Wireshark  
+-Cyberchef
 
 ## Write-up
 
@@ -86,10 +88,18 @@ This was used by the Adversary to maintain persistence on the system.
 
 ### Question 9 - The system was compromised as the result of a Microsoft Office document opening, received by email. What is MD5 hash of this document (for example, d41d8cd98f00b204e9800998ecf8427e)?
 I started by looking for document files with the <b>filescan</b> module in Volatility. This gave me the below results:
-![image](https://user-images.githubusercontent.com/95626414/145031565-cf60a7ec-716b-418b-bdc5-2e1711f089f0.png)
-So I guess it's going to be one of the above files. But, how do I receive them to calculate the hash value..
+![image](https://user-images.githubusercontent.com/95626414/145031565-cf60a7ec-716b-418b-bdc5-2e1711f089f0.png)  
+So I guess it's going to be one of the above files. But, how do I receive them to calculate the hash value.. this took me a little while to figure out.
 
-[TODO}
+So in Whireshark I made an export of all ELM files as shown below. I went through all the exported EML files and noticed that the e-mail <b>Oil Market current state</b> had a zip file attached to it.
+![image](https://user-images.githubusercontent.com/95626414/145417708-4cf42eaa-1658-4215-860d-9d9ff1604002.png)
+
+I copied the base64 encoded block for the zip file out of the e-mail headers. I pasted the base64 code in CyberChef and decoded the content and saved it to a file. After changing the file extension of the output file to .zip, I was able to extract it's content. This zip contained a file named <b>Why Saudi Arabia Will Lose The Next Oil Price Was.docx</b>. Next, I used PowerShell to calculate the hash value of the file:
+```
+Get-FileHash -Algorithm md5 'Why Saudi Arabia Will Lose The Next Oil Price Was.docx'
+```
+
+This returned the answer to this challenge: <b>aa7ee7f712780aebe9136cabc24bf875</b>
 
 ### Question 10 - The document, that was initially opened by user, didn't contain anything malicious itself. It downloaded another document from the Internet as a Microsoft Word template. Malicious code, which has led to the system compromise, is located inside this template directly. What link was used by the first document to download the second document as a template (for example, https://address/file.com)?
 
