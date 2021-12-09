@@ -91,7 +91,7 @@ I started by looking for document files with the <b>filescan</b> module in Volat
 ![image](https://user-images.githubusercontent.com/95626414/145031565-cf60a7ec-716b-418b-bdc5-2e1711f089f0.png)  
 I guess it's going to be one of the above files. But, how do I receive them to calculate the hash value.. this took me a little while to figure out.
 
-So in Whireshark I made an export of all ELM files as shown below. I went through all the exported EML files and noticed that the e-mail <b>Oil Market current state</b> had a zip file attached to it.  
+So in Whireshark I made an export of all ELM files as shown below. I went through all the exported EML files and noticed that the e-mail <b>Oil Market current state.EML</b> had a zip file attached to it.  
 ![image](https://user-images.githubusercontent.com/95626414/145417708-4cf42eaa-1658-4215-860d-9d9ff1604002.png)
   
 I copied the base64 encoded block for the zip file out of the e-mail headers. I pasted the base64 code in CyberChef and decoded the content and saved it to a file. After changing the file extension of the output file to .zip, I was able to extract it's content. This zip contained a file named <b>Why Saudi Arabia Will Lose The Next Oil Price Was.docx</b>. Next, I used PowerShell to calculate the hash value of the file:
