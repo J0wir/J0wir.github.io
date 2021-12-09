@@ -108,7 +108,7 @@ After succesfully downloading the document in question 9, the next step was to r
 ![image](https://user-images.githubusercontent.com/95626414/145423131-7ebb540e-fd15-4d1d-b35e-4ac93d7ed94d.png)
 
 ### Question 11 - During the post-exploitation attacker delivered to the compromised host a special Active Directory Enumeration utility. Which link did the attacker use to download this utility (for example, https://address/file.com)?
-I found this answer with a little bit of luck. When I saw Windows Event Logs in the evidence directory, the first thing I did is run Chainsaw against it. I been using this tool lately every time I must investigate Event Logging. I would recommend this tool to everyone.
+I found this answer with a little bit of luck. When I saw Windows Event Logs in the evidence directory, the first thing I did is run Chainsaw against it. I been using this tool lately every time I must investigate Event Logging. I would recommend this tool to everyone.  
 ![image](https://user-images.githubusercontent.com/95626414/145031916-1a7a0c99-7d35-485d-998f-3d42fe47d9ff.png)
 As shown in the picture the Adverary used </b<http://196.6.112.70/disco.jpg</b> to download the utility.
 
