@@ -60,10 +60,10 @@ This in combination with the below entry in the Windows Event Logging, made me t
 ![image](https://user-images.githubusercontent.com/95626414/144878901-5f7203e5-dda7-467b-85ab-c3c7916e6253.png)
 
 ### Question 4 - What is the PID of the process where malicious code was located at the moment of forensic artifacts acquisition?
-To answer this question I analysed the <b>pstree</b> output and noticed some intressting process being spawned by the parent process <b>winlogon.exe</b>.
+To answer this question I analysed the <b>pstree</b> output and noticed some intressting process being spawned by the parent process <b>winlogon.exe</b>.  
 ![image](https://user-images.githubusercontent.com/95626414/145025813-ff2f764b-d463-42a7-8ab1-78425e8b5556.png)  
-
-This in combination with malicious code being embedded in the process made us think this was the correct answer.
+  
+This in combination with malicious code being embedded in the process made us think this was the correct answer.  
 ![image](https://user-images.githubusercontent.com/95626414/145034909-8e265975-9d44-4119-8fd1-65f16e934734.png)
 
 
@@ -84,6 +84,8 @@ This was used by the Adversary to maintain persistence on the system.
 ### Question 6 - The autostart entry from the previous step is used to launch the script, which in turn leads to the malicious code execution in the memory of the process, which is discussed in question 4. This code is extracted by script from some system place in the encoded form. The decoded value of this string is executable PE-file. How did Microsoft Antivirus detect this file on 2020-06-21?
 
 ### Question 7 - The process, mentioned in the question 4, isn't the initial process, where malicious code, described in the previous question, was executed by script from autostart. What is the name of the initial process (in the format program.exe), that is spawned by autostart script and used for further malicious code execution, that subsequently migrates to the address space of the process, mentioned in the question 4.
+
+Looking back at the <b>pstree</b> output from question 4, <b>dwm.exe</b> was identified as answer.
 
 ### Question 8 - The autostart entry from the previous step is used to launch the script, which in turn leads to the malicious code execution in the memory of the process, which is discussed in question 4. Provide the URL, which was used to download this script from the Internet during the host compromise. The script that runs at each system star (which is described in question 6) was downloaded to the compromised system from the Internet. Provide the URL, which was used to download this script
 
