@@ -12,7 +12,8 @@ CyberCorp's Cybersecurity team isolated one of the potentially compromised hosts
 -Volatility 2.7  
 -Registry Explorer  
 -Wireshark  
--Cyberchef
+-Cyberchef  
+-Oletools
 
 ## Write-up
 
@@ -102,6 +103,9 @@ Get-FileHash -Algorithm md5 'Why Saudi Arabia Will Lose The Next Oil Price Was.d
 This returned the answer to this challenge: <b>aa7ee7f712780aebe9136cabc24bf875</b>
 
 ### Question 10 - The document, that was initially opened by user, didn't contain anything malicious itself. It downloaded another document from the Internet as a Microsoft Word template. Malicious code, which has led to the system compromise, is located inside this template directly. What link was used by the first document to download the second document as a template (for example, https://address/file.com)?
+
+After succesfully downloading the document in question 9, the next step was to run oletools against the document. This returned us with the answer to this question: <b>http://75.19.45.11/Supplement.dotm</b>  
+![image](https://user-images.githubusercontent.com/95626414/145423131-7ebb540e-fd15-4d1d-b35e-4ac93d7ed94d.png)
 
 ### Question 11 - During the post-exploitation attacker delivered to the compromised host a special Active Directory Enumeration utility. Which link did the attacker use to download this utility (for example, https://address/file.com)?
 I found this answer with a little bit of luck. When I saw Windows Event Logs in the evidence directory, the first thing I did is run Chainsaw against it. I been using this tool lately every time I must investigate Event Logging. I would recommend this tool to everyone.
