@@ -85,7 +85,7 @@ This was used by the Adversary to maintain persistence on the system.
 
 ### Question 7 - The process, mentioned in the question 4, isn't the initial process, where malicious code, described in the previous question, was executed by script from autostart. What is the name of the initial process (in the format program.exe), that is spawned by autostart script and used for further malicious code execution, that subsequently migrates to the address space of the process, mentioned in the question 4.
 
-Looking back at the <b>pstree</b> output from question 4, <b>dwm.exe</b> was identified as answer.
+Looking back at the <b>pstree</b> output from question 4, <b>dwm.exe</b> was identified as the answer.
 
 ### Question 8 - The autostart entry from the previous step is used to launch the script, which in turn leads to the malicious code execution in the memory of the process, which is discussed in question 4. Provide the URL, which was used to download this script from the Internet during the host compromise. The script that runs at each system star (which is described in question 6) was downloaded to the compromised system from the Internet. Provide the URL, which was used to download this script
 
