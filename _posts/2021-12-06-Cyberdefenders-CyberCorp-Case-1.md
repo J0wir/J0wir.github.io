@@ -135,6 +135,7 @@ In this commando the password is shown: <b>!!feb15th2k6!!</b>
 ![image](https://user-images.githubusercontent.com/95626414/145032229-d2273f20-ee79-4bfc-805b-b396a9d411c3.png)
 
 ### Question 14 - What is the name of the tool (for example, program.exe), that probably was used by an attacker to compromise the user account?
+The attacker used <b>reg.exe</b> to compromise the user account. The attacker saved the system registry hive to <b>C:\Windows\TEMP\sa.tmp</b>.
 
 ### Question 15 - The attacker used a compromised account for unauthorized Domain Controller access. What is the IP address of this Domain Controller?
 The answer for this question was found during question 13.
