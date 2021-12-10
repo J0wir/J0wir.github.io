@@ -88,6 +88,13 @@ This was used by the Adversary to maintain persistence on the system.
 Looking back at the <b>pstree</b> output from question 4, <b>dwm.exe</b> was identified as the answer.
 
 ### Question 8 - The autostart entry from the previous step is used to launch the script, which in turn leads to the malicious code execution in the memory of the process, which is discussed in question 4. Provide the URL, which was used to download this script from the Internet during the host compromise. The script that runs at each system star (which is described in question 6) was downloaded to the compromised system from the Internet. Provide the URL, which was used to download this script
+During working on question 11, a file named <b>Supplement.dotm</b> was downloaded. I tried to recover this file by first searching for <b>.dotm</b> with the <b>filescan</b> module and afterwards dump the results with the <b>dumpfile</b> module.
+
+Now I am left with a <b>dotm.dat</b> file. I decided to run <b>olevbs</b> which is a script to parse OLE and OpenXML files such as MS Office documents
+(e.g. Word, Excel), to extract VBA Macro code in clear text. Part of the output is shown in the picture below.
+![image](https://user-images.githubusercontent.com/95626414/145647862-eb0e6274-fdfb-41dc-91a4-f31a5b8a354a.png)
+
+The output contained the answer to this question: <b>https[:]//raw.githubusercontent[.]com/xia33F/APT/master/payloads/wrapper_page</b>
 
 ### Question 9 - The system was compromised as the result of a Microsoft Office document opening, received by email. What is MD5 hash of this document (for example, d41d8cd98f00b204e9800998ecf8427e)?
 I started by looking for document files with the <b>filescan</b> module in Volatility. This gave me the below results:
