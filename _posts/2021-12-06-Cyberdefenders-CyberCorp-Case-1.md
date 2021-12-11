@@ -83,6 +83,12 @@ This was used by the Adversary to maintain persistence on the system.
 
 ### Question 6 - The autostart entry from the previous step is used to launch the script, which in turn leads to the malicious code execution in the memory of the process, which is discussed in question 4. This code is extracted by script from some system place in the encoded form. The decoded value of this string is executable PE-file. How did Microsoft Antivirus detect this file on 2020-06-21?
 
+This one was easy after I completed question 8. I calculated the MD5 hash value and uploaded it to <a href="https://www.virustotal.com/gui/file/3890293cd49a688836d53b8a98719690c09b86ced46e677e5b3b8df52a2b4611"> VirtusTotal</a>.
+
+Next look at how Microsoft detected this file and this gave us the answer: <b>Trojan:Win64/Meterpreter.E</b>
+
+![image](https://user-images.githubusercontent.com/95626414/145683362-82bc28d0-67b1-4424-928f-e668c35e7ef0.png)
+
 ### Question 7 - The process, mentioned in the question 4, isn't the initial process, where malicious code, described in the previous question, was executed by script from autostart. What is the name of the initial process (in the format program.exe), that is spawned by autostart script and used for further malicious code execution, that subsequently migrates to the address space of the process, mentioned in the question 4.
 
 Looking back at the <b>pstree</b> output from question 4, <b>dwm.exe</b> was identified as the answer.
