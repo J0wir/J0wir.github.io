@@ -8,12 +8,12 @@ CyberCorp company has been informed that its infrastructure is likely to be comp
 CyberCorp's Cybersecurity team isolated one of the potentially compromised hosts from the corporate network and collected artifacts necessary for the investigation: memory dump, OS event logs, registry files, Prefetch files, $MFT file, ShimCache, AmCache, network traffic dumps. You will have to analyze the collected artifacts and answer the questions to complete the investigation.
 
 ## Tools used for this challenge
--Chainsaw  
--Volatility 2.7  
--Registry Explorer  
--Wireshark  
--Cyberchef  
--Oletools
+-<a href="https://github.com/countercept/chainsaw"> Chainsaw</a>
+-<a href="https://github.com/volatilityfoundation/volatility"> Volatility</a>
+-<a href="https://ericzimmerman.github.io/#!index.md"> Registry Explorer</a>
+-<a href="https://www.wireshark.org/d"> Wireshark</a>
+-<a href="https://gchq.github.io/CyberChef/"> Cyberchef</a>
+-<a href="https://github.com/decalage2/oletools"> Oletools</a>
 
 ## Write-up
 
