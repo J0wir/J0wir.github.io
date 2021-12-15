@@ -21,6 +21,8 @@ github_username: "J0wir"
 theme: jekyll-theme-midnight
 
 #rss: rss
+github:
+  is_project_page: false
 
 kramdown:
   syntax_highlighter_opts:
