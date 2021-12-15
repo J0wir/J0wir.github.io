@@ -18,54 +18,56 @@ CyberCorp's Cybersecurity team isolated one of the potentially compromised hosts
 ## Write-up
 
 ### Question 1 - What is the build number (in the format ddddd, where each d is a single decimal number, for example - 12345) of the installed Windows version?
-Every Windows version since 2000, will keep product version in the Registry. To view this information you can use a tool like “Registry Explorer”. 
+Every Windows version since 2000, will keep product version information in the Registry. To view this information you can use a tool like Registry Explorer. 
 
 The product version information including the build number is stored in the following key:  
 <b>HKLM\Software\Microsoft\Windows NT\CurrentVersion</b>
 
-When viewing this key, we can see the below information, including the build number.
+As shown below this key provides product version information, including the build number.
 ![image](https://user-images.githubusercontent.com/95626414/144877942-c0a726f5-045f-4a2d-b931-70caf53e79d9.png)
 
-As shown in the picture the currentbuild is: <b>17134</b>
+The currentbuild is: <b>17134</b>
 
 ### Question 2 - What is the parent process PID of the process, that accepts incoming network connections on the port 1900/UDP?
 To answer this question, I’ve used Volatility 2.7 to find incoming network connections and to determine what the parent process is.
 
-Before we can do this, we need to find the correct profile for the memory image. This was done by running the <b>imageinfo</b> plugin.
+Before you can run Volatility commando's, a correct profile for the memory image is needed. To find the profile a plugin called <b>imageinfo</b> was used.
+
 ```
 vol.py -f memdump.mem imageinfo
 ```
 ![Screenshot 2021-12-06 at 16 21 54](https://user-images.githubusercontent.com/95626414/144877393-63dc3104-ee67-41bf-a30f-19c7d943a654.png)
 
-Next, we use the <b>netscan</b> plugin to return all network connections. Grep was used to filter the output for port 1900.
+Now that we got the profile, the <b>netscan</b> plugin was used to return all network connections. To filter the output for port 1900 grep was used.
+
 ```
 vol.py -f memdump.mem --profile=Win10x64_17134 netscan | grep :1900.
 ```
 ![Screenshot 2021-12-06 at 16 34 22](https://user-images.githubusercontent.com/95626414/144877508-ddfd1d4a-957c-427d-9af2-3ae9c8bbfa74.png)
 
-All connections on port 1900 are from <b>svchost.exe</b> with the PID <b>4688</b>. The parent process can be found by running the <b>pstree</b> module. This will display the process listing in tree form. To search for the process with PID 4688 a grep filter was added to the query.
+All connections on port 1900 are coming from <b>svchost.exe</b> with the PID <b>4688</b>. The parent process can be found by running the <b>pstree</b> module. This module will display the process listing in tree form. To search for the process with PID 4688 a grep filter was used.
 
 ```
 vol.py -f memdump.mem --profile=Win10x64_17134 pstree | grep 4688
 ```
-The output of this command shows the parent process of svchost.exe being <b>648</b>     
+The output of this command shows the parent process of svchost.exe is <b>648</b>     
     
 ### Question 3 - What is the IP address of the attacker command and control center, the connection with which was still active at the time of forensic artifacts acquisition?
-While scrolling through the <b>netscan</b> output I noticed the following ESTABLISHED connection:
+While scrolling through the <b>netscan</b> output the following ESTABLISHED connection stood out:
 ```
 TCPv4 192.168.184.130:50133 196.6.112.70:443 ESTABLISHED -1
 ```
-This in combination with the below entry in the Windows Event Logging, made me think the anwser is: <b>196.6.112.70</b>
+This connection in combination with an entry in the Windows Event Logging shown below, made it clear the answer was: <b>196.6.112.70</b>
 
 ![image](https://user-images.githubusercontent.com/95626414/144878901-5f7203e5-dda7-467b-85ab-c3c7916e6253.png)
 
 ### Question 4 - What is the PID of the process where malicious code was located at the moment of forensic artifacts acquisition?
-To answer this question I analysed the <b>pstree</b> output and noticed some intressting process being spawned by the parent process <b>winlogon.exe</b>.  
+To answer this question the <b>pstree</b> output was analysed and some interesting processes were identified. Those processes were spawned by the parent process <b>winlogon.exe</b>.
+
 ![image](https://user-images.githubusercontent.com/95626414/145025813-ff2f764b-d463-42a7-8ab1-78425e8b5556.png)  
   
-This in combination with malicious code being embedded in the process made us think this was the correct answer.  
+This in combination with malicious code being embedded in the process made me think this was the correct answer.  
 ![image](https://user-images.githubusercontent.com/95626414/145034909-8e265975-9d44-4119-8fd1-65f16e934734.png)
-
 
 The PID of <b>winlogon.exe</b> was the correct answer.
 
@@ -77,9 +79,7 @@ powershell.exe -noP -ep bypass iex -c \"('C:\\Users\\john.goldberg\\AppData\\Roa
 While looking deeper into this, I noticed a WMI CommandLineEventConsumer with the name: <b>LogRotate Consumer</b> using the same command line.
 ![image](https://user-images.githubusercontent.com/95626414/145028989-4192ef62-e9ba-408f-9e30-ce4d57bd4936.png)
 
-As shown in the picture this script in launched everytime the user enters his username and password.
-
-This was used by the Adversary to maintain persistence on the system.
+As shown in the picture the script in launch every time the user entered his username and password. This technique was used by the Adversary to maintain persistence on the system.
 
 ### Question 6 - The autostart entry from the previous step is used to launch the script, which in turn leads to the malicious code execution in the memory of the process, which is discussed in question 4. This code is extracted by script from some system place in the encoded form. The decoded value of this string is executable PE-file. How did Microsoft Antivirus detect this file on 2020-06-21?
 
