@@ -128,7 +128,7 @@ After successfully downloading the document in question 9, the next step was to 
 The answer to this question was found with a little bit of luck. At the start of this challenge I noticed Windows Event Logs in the evidence directory. The first thing I did is run the tool <b>Chainsaw</b> against it. Lately I've been using this tool a lot during IR investigations and would highly recommend it to anyone.
  
 ![image](https://user-images.githubusercontent.com/95626414/145031916-1a7a0c99-7d35-485d-998f-3d42fe47d9ff.png)
-As shown in the picture above the Adverary used </b<http://196.6.112.70/disco.jpg</b> to download the utility.
+As shown in the picture above the Adverary used <b<http://196.6.112.70/disco.jpg</b> to download the utility.
 
 ### Question 12 - As described in the previous question utility has created several files in the compromised system, that subsequently were deleted by an attacker. One of the created files had a bin extension. What is the name of this file (for example, name.bin)?
 
