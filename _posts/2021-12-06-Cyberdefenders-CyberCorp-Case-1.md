@@ -72,20 +72,20 @@ This in combination with malicious code being embedded in the process made me th
 The PID of <b>winlogon.exe</b> was the correct answer.
 
 ### Question 5 - On a compromised system, malicious code, discovered in the previous step, is launched every system start, since the attacker has used one of the persistence techniques. So, what is the name of the autostart entry (those part, that is directly responsible for code execution), used by the attacker for persistence?
-This question did take me some time. I was looking at all sort of persistence techniques, but forgot about WMI. While analysing the Windows Event Logs I noticed some processes being created (<b>EventID 4688</b>) with the below command line:
+This question did take me some time. I was looking at all sort of persistence techniques, but forgot about WMI. While analysing the Windows Event Logs I noticed processes being created (<b>EventID 4688</b>) with the following command line:
 ```
 powershell.exe -noP -ep bypass iex -c \"('C:\\Users\\john.goldberg\\AppData\\Roaming\\Microsoft\\Office\\Recent\\tmpA7Z2.ps1')
 ```
 While looking deeper into this, I noticed a WMI CommandLineEventConsumer with the name: <b>LogRotate Consumer</b> using the same command line.
 ![image](https://user-images.githubusercontent.com/95626414/145028989-4192ef62-e9ba-408f-9e30-ce4d57bd4936.png)
 
-As shown in the picture the script in launch every time the user entered his username and password. This technique was used by the Adversary to maintain persistence on the system.
+As shown in the picture above the script is launch every time the user entered his username and password. This technique was used by the Adversary to maintain persistence on the system.
 
 ### Question 6 - The autostart entry from the previous step is used to launch the script, which in turn leads to the malicious code execution in the memory of the process, which is discussed in question 4. This code is extracted by script from some system place in the encoded form. The decoded value of this string is executable PE-file. How did Microsoft Antivirus detect this file on 2020-06-21?
 
-This one was easy after I completed question 8. I calculated the MD5 hash value and uploaded it to <a href="https://www.virustotal.com/gui/file/3890293cd49a688836d53b8a98719690c09b86ced46e677e5b3b8df52a2b4611"> VirtusTotal</a>.
+This question was easy after completing question 8. The MD5 hash value was calculated and uploaded to <a href="https://www.virustotal.com/gui/file/3890293cd49a688836d53b8a98719690c09b86ced46e677e5b3b8df52a2b4611"> VirtusTotal</a>.
 
-Next look at how Microsoft detected this file and this gave us the answer: <b>Trojan:Win64/Meterpreter.E</b>
+On VirusTotal it shows that Microsoft detects this file as <b>Trojan:Win64/Meterpreter.E</b>.
 
 ![image](https://user-images.githubusercontent.com/95626414/145683362-82bc28d0-67b1-4424-928f-e668c35e7ef0.png)
 
@@ -94,10 +94,10 @@ Next look at how Microsoft detected this file and this gave us the answer: <b>Tr
 Looking back at the <b>pstree</b> output from question 4, <b>dwm.exe</b> was identified as the answer.
 
 ### Question 8 - The autostart entry from the previous step is used to launch the script, which in turn leads to the malicious code execution in the memory of the process, which is discussed in question 4. Provide the URL, which was used to download this script from the Internet during the host compromise. The script that runs at each system star (which is described in question 6) was downloaded to the compromised system from the Internet. Provide the URL, which was used to download this script
-During working on question 11, a file named <b>Supplement.dotm</b> was downloaded. I tried to recover this file by first searching for <b>.dotm</b> with the <b>filescan</b> module and afterwards dump the results with the <b>dumpfile</b> module.
+While working on question 11, a file named <b>Supplement.dotm</b> was found. To recover this file, a search was performed for <b>.dotm</b> with the <b>filescan</b> module. After the file was identified it was dumped with the <b>dumpfile</b> module.
 
-Now I am left with a <b>dotm.dat</b> file. I decided to run <b>olevbs</b> which is a script to parse OLE and OpenXML files such as MS Office documents
-(e.g. Word, Excel), to extract VBA Macro code in clear text. Part of the output is shown in the picture below.
+Now I was left with a <b>dotm.dat</b> file. I decided to run <b>olevbs</b> which is a script to parse OLE and OpenXML files such as MS Office documents
+(e.g. Word, Excel), in order to extract VBA Macro code in clear text. Part of the output is shown in the picture below.
 ![image](https://user-images.githubusercontent.com/95626414/145647862-eb0e6274-fdfb-41dc-91a4-f31a5b8a354a.png)
 
 The output contained the answer to this question: <b>https[:]//raw.githubusercontent[.]com/xia33F/APT/master/payloads/wrapper_page</b>
@@ -105,31 +105,35 @@ The output contained the answer to this question: <b>https[:]//raw.githubusercon
 ### Question 9 - The system was compromised as the result of a Microsoft Office document opening, received by email. What is MD5 hash of this document (for example, d41d8cd98f00b204e9800998ecf8427e)?
 I started by looking for document files with the <b>filescan</b> module in Volatility. This gave me the below results:
 ![image](https://user-images.githubusercontent.com/95626414/145031565-cf60a7ec-716b-418b-bdc5-2e1711f089f0.png)  
-I guess it's going to be one of the above files. But, how do I receive them to calculate the hash value.. this took me a little while to figure out.
+I guess it's going to be one of the above files. But, how do I receive them in order to calculate the hash value..? This took me a bit to figure out.
 
-So in Whireshark I made an export of all ELM files as shown below. I went through all the exported EML files and noticed that the e-mail <b>Oil Market current state.EML</b> had a zip file attached to it.  
+In Wireshark an export was created of all ELM files as shown in the picture below. All exported EML files were analysed and one e-mail <b>(Oil Market current state.EML)</b> had a zip file attached to it.
+
 ![image](https://user-images.githubusercontent.com/95626414/145417708-4cf42eaa-1658-4215-860d-9d9ff1604002.png)
   
-I copied the base64 encoded block for the zip file out of the e-mail headers. I pasted the base64 code in CyberChef and decoded the content and saved it to a file. After changing the file extension of the output file to .zip, I was able to extract it's content. This zip contained a file named <b>Why Saudi Arabia Will Lose The Next Oil Price Was.docx</b>. Next, I used PowerShell to calculate the hash value of the file:
+The base64 encoded block for the zip file was copied out of the e-mail headers. The base64 encoded block was decoded and the output saved to a file by using <b>CyberChef</b>. After changing the file extension of the output file to .zip, I was able to extract it's content. This zip file contained a file named <b>Why Saudi Arabia Will Lose The Next Oil Price Was.docx</b>. 
+
+Next, PowerShell was used to calculate the hash value of this file:
 ```
 Get-FileHash -Algorithm md5 'Why Saudi Arabia Will Lose The Next Oil Price Was.docx'
 ```
 
-This returned the answer to this challenge: <b>aa7ee7f712780aebe9136cabc24bf875</b>
+This gave the answer to this challenge: <b>aa7ee7f712780aebe9136cabc24bf875</b>
 
 ### Question 10 - The document, that was initially opened by user, didn't contain anything malicious itself. It downloaded another document from the Internet as a Microsoft Word template. Malicious code, which has led to the system compromise, is located inside this template directly. What link was used by the first document to download the second document as a template (for example, https://address/file.com)?
 
-After succesfully downloading the document in question 9, the next step was to run oletools against the document. This returned us with the answer to this question: <b>http[:]//75.19.45[.]11/Supplement.dotm</b>  
+After successfully downloading the document in question 9, the next step was to run oletools against the document. This returned us with the answer to this question: <b>http[:]//75.19.45[.]11/Supplement.dotm</b>  
 ![image](https://user-images.githubusercontent.com/95626414/145423131-7ebb540e-fd15-4d1d-b35e-4ac93d7ed94d.png)
 
 ### Question 11 - During the post-exploitation attacker delivered to the compromised host a special Active Directory Enumeration utility. Which link did the attacker use to download this utility (for example, https://address/file.com)?
-I found this answer with a little bit of luck. When I saw Windows Event Logs in the evidence directory, the first thing I did is run Chainsaw against it. I been using this tool lately every time I must investigate Event Logging. I would recommend this tool to everyone.  
+The answer to this question was found with a little bit of luck. At the start of this challenge I noticed Windows Event Logs in the evidence directory. The first thing I did is run the tool <b>Chainsaw</b> against it. Lately I've been using this tool a lot during IR investigations and would highly recommend it to anyone.
+ 
 ![image](https://user-images.githubusercontent.com/95626414/145031916-1a7a0c99-7d35-485d-998f-3d42fe47d9ff.png)
-As shown in the picture the Adverary used </b<http://196.6.112.70/disco.jpg</b> to download the utility.
+As shown in the picture above the Adverary used </b<http://196.6.112.70/disco.jpg</b> to download the utility.
 
 ### Question 12 - As described in the previous question utility has created several files in the compromised system, that subsequently were deleted by an attacker. One of the created files had a bin extension. What is the name of this file (for example, name.bin)?
 
-To awnser this question I looked at the Master File Table (MFT), since this is a database in which information about every file on a NTFS volume is kept. I did this by parsing the MFT file with EricZimmermans his MFT parser. Next, I did filter on <b>.bin</b> and scrolled through the results. While scrolling I noticed a strange file name in the temp directory.
+To answer this question the Master File Table (MFT) was analysed, since this is a database in which information about every file on a NTFS volume is kept. This was done by parsing the MFT file with EricZimmermans his MFT parser. Next, a filter was created on <b>.bin</b> and while scrolling through the results a strange file name was found in the temp directory.
 ```
 .\Windows\Temp	ODNhN2YwNWUtYWFmYy00MDVmLWFhYTQtNGMzM2Q3NmYwMWM4.bin
 ```
@@ -137,7 +141,7 @@ To awnser this question I looked at the Master File Table (MFT), since this is a
 ### Question 13 - During the post-exploitation attacker has compromised a privileged user account. What is its password?
 As described earlier I've used ChainSaw to analyse the Windows Event Logging. The output of this tool shows the use of <b>net use</b>. The net use command is a Command Prompt command used to connect to, remove, and configure connections to shared resources, like mapped drives and network printers.
 
-In this commando the password is shown: <b>!!feb15th2k6!!</b>
+In this command the password is shown: <b>!!feb15th2k6!!</b>
 ![image](https://user-images.githubusercontent.com/95626414/145032229-d2273f20-ee79-4bfc-805b-b396a9d411c3.png)
 
 ### Question 14 - What is the name of the tool (for example, program.exe), that probably was used by an attacker to compromise the user account?
