@@ -68,7 +68,6 @@ To answer this question the <b>pstree</b> output was analysed and some interesti
   
 This in combination with malicious code being embedded in the process made me think this was the correct answer.  
 ![image](https://user-images.githubusercontent.com/95626414/145034909-8e265975-9d44-4119-8fd1-65f16e934734.png)
-
 The PID of <b>winlogon.exe</b> was the correct answer.
 
 ### Question 5 - On a compromised system, malicious code, discovered in the previous step, is launched every system start, since the attacker has used one of the persistence techniques. So, what is the name of the autostart entry (those part, that is directly responsible for code execution), used by the attacker for persistence?
