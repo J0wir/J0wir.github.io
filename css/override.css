@@ -43,3 +43,13 @@ hr {
   font-size: 2.5em;
   opacity: 0.3;
 }
+
+@import "{{ site.theme }}";
+
+footer {
+  display: none !important;
+}
+
+.btn {
+  display: none !important;
+}
