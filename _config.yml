@@ -30,6 +30,9 @@ kramdown:
     
 plugins:
   - jekyll-feed
+title: Random blogs
+description: Some random blogs starting with cyberdefenders.org stuff.
+author: J0wir
   - jekyll-sitemap
 
 titles_from_headings:
