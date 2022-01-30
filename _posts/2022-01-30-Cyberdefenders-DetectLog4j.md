@@ -57,8 +57,8 @@ OS accounts information show that <b>myoussef</b> was created on <b>2021-12-28:0
 ![image](https://user-images.githubusercontent.com/95626414/151664061-862c95fe-36be-481e-90c8-e2ccadc66c03.png)
 
 ### Question 7 - What is the user mhasan password hint?
-The answer to this question can be found in the same view in <b>Autopsy</b> as used for question 6.
-As shown in the picture below the password hint is: <b>https://www.linkedin.com/in/0xmohamedhasan/</b>
+The answer to this question can be found in the same <b>Autopsy</b> view as used for question 6.
+As shown in the picture below the password hint is: <b>https://www.linkedin.com/in/0xmohamedhasan/</b>  
 ![image](https://user-images.githubusercontent.com/95626414/151664133-f38d79c8-f3e1-4345-a28a-2444e0f586c9.png)
 
 ### Question 8 - What is the version of the VMware product installed on the machine?
@@ -67,7 +67,6 @@ This question can easily be answered with <b>Autopsy</b>. All the installed prog
 
 ### Question 9 - What is the version of the log4j library used by the installed VMware product?
 VMware published an <a href="https://kb.vmware.com/s/article/87096"> article</a> on its products being vulnerable to log4j and how to mitigate the risk:
-
 According to the article the vulnerable library should be stored in the following location:
 <em>C:\Program Files\VMware\vCenter Server\common-jars\log4j-core-2.11.2.jar</em>
 
@@ -78,7 +77,6 @@ As described in the article the vulnerable library </b>log4j-core-2.11.2.jar</b>
 
 ### Question 10 - What is the log4j library log level specified in the configuration file?
 After a bit of searching on Google I found a website describing a file named <b>log4j.properties</b>. The website said the following over this properties file:
-
 <em>The log4j.properties file is a log4j configuration file which keeps properties in key-value pairs. By default, the LogManager looks for a file named log4j.properties in the CLASSPATH.</em>
 
 This sounds like it could contain the answer to this question. An index search in <b>Autopsy</b> was created to locate the file and view its content. As shown in the picture below the category is set to <b>INFO</b>.
@@ -89,7 +87,7 @@ I was unable to answer this question based on the analyzed evidence. However, on
 This blog post describes that the vulnerability Is in the <b>X-Forwarded-For</b> header of the vCenter SSO login page. This was also the right answer to this question.
 
 ### Question 12 - The attacker used the log4shell.huntress.com payload to detect if vcenter instance is vulnerable. What is the first link of the log4huntress payload?
-A search was created in <b>Autopsy</b> to search for the substring <b>huntress.com</b>. The search returned 5 results, but only the <b>websso.log</b> and <b>audit_events.log</b> seem relevant.
+A search was created in <b>Autopsy</b> to search for the substring <b>huntress.com</b>. The search returned 5 results, but only the <b>websso.log</b> and <b>audit_events.log</b> seem relevant.  
 ![image](https://user-images.githubusercontent.com/95626414/151664446-0a9975fc-dfed-41ae-8831-dc6255f2fa9e.png)
 
 Since the log4j vulnerability is in the SSO login page, I started with investigating the <b>websso.log</b>. This log contained multiple entries with the string <b>log4shell.huntress.com</b>. However, the first payload is: <b>log4shell.huntress.com:1389/b1292f3c-a652-4240-8fb4-59c43141f55a</b>
@@ -101,7 +99,7 @@ The first event with a successful login is shown below:
 <em>[audit_events.log, 2021-12-28T20:39:29.349Z {"user":"administrator@vsphere.local","client":"fe80::7c68:4669:c33c:90a3%5","timestamp":"12/28/2021 12:39:29 PST","description":"User administrator@vsphere.local@fe80::7c68:4669:c33c:90a3%5 logged in with response code 200","eventSeverity":"INFO","type":"com.vmware.sso.LoginSuccess"}</em>
 
 ### Question 14 - What is the attacker's IP address?
-Searching through the <b>audit_event.log</b> the IP address <b>192.168.112.128</b> was identified, which was the correct answer to this question.
+Searching through the <b>audit_event.log</b> the IP address <b>192.168.112.128</b> was identified, which was the correct answer to this question.  
 <em>2021-12-29T01:58:58.790Z {"user":"mlabib@VCW65","client":"192.168.112.128","timestamp":"12/28/2021 17:58:58 PST","description":"User mlabib@VCW65@192.168.112.128 logged in with response code 200","eventSeverity":"INFO","type":"com.vmware.sso.LoginSuccess"}</em>
 
 ### Question 15 - What is the port the attacker used to receive the cobalt strike reverse shell?
@@ -120,13 +118,13 @@ The reverse shell was received on <b>192.168.112:128:1337</b>
 ### Question 16 - What is the script name published by VMware to mitigate log4shell vulnerability?
 VMware published an <a href="https://kb.vmware.com/s/article/87081"> article</a> on mitigating the log4shell vulnerabilities.
 
-Below is a snipped of this article:
+Below is a snipped of this article:  
 <em>IMPORTANT: vc_log4j_mitigator.py will now mitigate CVE-2021-44228 and CVE-2021-45046 on vCenter Server end-to-end without extra steps. This script replaces the need to run remove_log4j_class.py and vmsa-2021-0028-kb87081.py independently. However, it is not necessary to run if you've already used those in your environment.</em>
 
 The answer to this question: <b>vc_log4j_mitigator.py</b>
 
 ### Question 17 - In some cases, you may not be able to update the products used in your network. What is the system property needed to set to 'true' to work around the log4shell vulnerability?
-Apache published an <a href="https://logging.apache.org/log4j/2.x/security.html"> article</a> about the log4j security vulnerabilities. In this article the following mitigation measure is mentioned:
+Apache published an <a href="https://logging.apache.org/log4j/2.x/security.html"> article</a> about the log4j security vulnerabilities. In this article the following mitigation measure is mentioned:  
 <em>setting system property log4j2.formatMsgNoLookups or environment variable LOG4J_FORMAT_MSG_NO_LOOKUPS to true for releases</em>
 
 The answer to this question is: <b>log4j2.formatMsgNoLookups</b>
