@@ -26,25 +26,25 @@ An alternative way of getting the hostname of the computer is using a tool like 
 ### Question 2 - What is the Timezone of the compromised machine?
 Something really cool I learned is that you can view the registry hives with <b>Autopsy</b>. The timezone information is stored in the <b>SYSTEM</b> registry hive, which is located in <b>Windows\System32\config</b>.
 
-Open the hive and go to <b>ControlSet001</b> and click on <b>TimeZoneInformation</b>, this shows the TimeZoneKeyName is <b>Pacific Standard Time</b>. 
+Open the hive and go to <b>ControlSet001</b> and click on <b>TimeZoneInformation</b>, this shows the <b>TimeZoneKeyName</b> is <b>Pacific Standard Time</b>. 
 ![image](https://user-images.githubusercontent.com/95626414/151663843-f77d11f6-68bc-4241-a217-aaafd96af921.png)
 
 Since most forensic reports use the UTC timezone, I assumed we need to convert PST to UTC.
-As shown in the picture below the difference is 8 hours. So the right answer is <b>UTC-8</b>.
+As shown in the picture below the time difference is 8 hours, so the right answer is <b>UTC-8</b>.
 ![image](https://user-images.githubusercontent.com/95626414/151663874-7973e92d-735f-44d4-867f-0ee086c7ed4f.png)
 
 ### Question 3 - what is the current build number on the system?
 <b>Autopsy</b> was used to view the <b>SOFTWARE</b> registry hive, which contains information about the build number. The product version information including the build number is stored in the following key:
 <em>HKLM\Software\Microsoft\Windows NT\CurrentVersion</em>
 
-As shown below this key provides product version information, including the build number.
+As shown in the picture below this key provides product version information, including the build number.  
 ![image](https://user-images.githubusercontent.com/95626414/151663909-f2ff2b77-5d54-48b9-9091-a7bbb687c441.png)
 
 ### Question 4 - what is the computer IP?
 The answer to this question can also be found in the registry. The IP addresses of the various network interfaces are stored under:  
 <em>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces</em>
   
-As shown in the picture below the IP address is <b>192.168.112.139<b>.
+As shown in the picture below the IP address is <b>192.168.112.139</b>.  
 ![image](https://user-images.githubusercontent.com/95626414/151663978-2212ba36-12ae-4776-baf5-64e40c2b74e0.png)
 
 ### Question 5 - What is the computer IP?
@@ -52,11 +52,13 @@ This information can be found in <em>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet
 ![image](https://user-images.githubusercontent.com/95626414/151664011-90e50de3-4891-4fbf-9411-6cf1c1c17d13.png)
 
 ### Question 6 - When was myoussef user created?
-When loading in the image Autopsy will parse OS Accounts information, which show the creation time of the different user accounts. OS accounts information shows that <b>myoussef</b> was created on <b>2021-12-28:07:57:23 CET</b>. However, this was the wrong answer, this timestamp had to be converted to UTC as well. The right answer was: <b>2021-12-28 06:57:23 UTC</b>
+When loading in the image Autopsy will parse the OS Accounts information, which show the creation time of the different user accounts.
+OS accounts information show that <b>myoussef</b> was created on <b>2021-12-28:07:57:23 CET</b>. However, this was the wrong answer, the timestamp first had to be converted to UTC. The right answer to this question is: <b>2021-12-28 06:57:23 UTC</b>
 ![image](https://user-images.githubusercontent.com/95626414/151664061-862c95fe-36be-481e-90c8-e2ccadc66c03.png)
 
 ### Question 7 - What is the user mhasan password hint?
-The answer to this question can be found in the same view in <b>Autopsy</b> as used for question 6.   As shown on the picture below the password hint is: <b>https://www.linkedin.com/in/0xmohamedhasan/</b>
+The answer to this question can be found in the same view in <b>Autopsy</b> as used for question 6.
+As shown in the picture below the password hint is: <b>https://www.linkedin.com/in/0xmohamedhasan/</b>
 ![image](https://user-images.githubusercontent.com/95626414/151664133-f38d79c8-f3e1-4345-a28a-2444e0f586c9.png)
 
 ### Question 8 - What is the version of the VMware product installed on the machine?
