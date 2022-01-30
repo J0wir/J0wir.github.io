@@ -14,16 +14,17 @@ For the last week, log4shell vulnerability has been gaining much attention not f
 ## Write-up
 
 ### Question 1 - What is the computer hostname?
-To try something new and mix up the tooling used for maximum learning experience, I decided the give <b>Autopsy</b> a shot.
+To try something new and mix up the tooling used for maximum learning experience, I decided the give <b>Autopsy</b> a shot. 
 
-When loading in the image <b>Autopsy</b> will parse the operating system information. The operating system information shows that the hostname of the computer is <b>vcw65</b>.
+When loading in the image <b>Autopsy</b> will parse the operating system information. The operating system information shows that the hostname of the computer is <b>vcw65</b>.  
+
 ![image](https://user-images.githubusercontent.com/95626414/151663702-c8968c52-795c-47ef-8291-288a1197341e.png)
 
 An alternative way of getting the hostname of the computer is using a tool like <b>Registry Explorer</b> and view the following key in de <b>SYSTEM</b> registry hive:
 <em>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ComputerName\ComputerName</em>
 
 ### Question 2 - What is the Timezone of the compromised machine?
-Something really cool I learned is that you can view the registry hives with <b>Autopsy</<b>b>. The timezone information is stored in the <b>SYSTEM</b> registry hive, which is located in <b>Windows\System32\config</b>.
+Something really cool I learned is that you can view the registry hives with <b>Autopsy</b>. The timezone information is stored in the <b>SYSTEM</b> registry hive, which is located in <b>Windows\System32\config</b>.
 
 Open the hive and go to <b>ControlSet001</b> and click on <b>TimeZoneInformation</b>, this shows the TimeZoneKeyName is <b>Pacific Standard Time</b>. 
 ![image](https://user-images.githubusercontent.com/95626414/151663843-f77d11f6-68bc-4241-a217-aaafd96af921.png)
